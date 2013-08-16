@@ -10,6 +10,6 @@
         this.controller._init();
     }
 
-    var app = new geoApp();
+    var geoapp = new geoApp();
 
 })();

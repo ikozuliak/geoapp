@@ -16,6 +16,7 @@
     <!-- build:css({.tmp,app}) assets/css/style.css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- endbuild -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 </head>
 <body>
 
@@ -26,16 +27,24 @@
 <![endif]-->
 
 <section id="content">
-    <article class="page">
-        <h1>Title</h1>
+    <section class="page">
+        <h1>GeoApp</h1>
 
-    </article>
+        <form action="#">
+            <label>Type city name</label>
+            <input type="text" class="input-block-level" placeholder="Type something…">
+        </form>
+
+        <section id="map-container"></section>
+
+    </section>
 </section>
 
 <script type="text/javascript">
     window.app = {};
 </script>
 <!-- build:js scripts/app.js -->
+
 <script src="scripts/helpers.js"></script>
 
 <script src="scripts/model.js"></script>
