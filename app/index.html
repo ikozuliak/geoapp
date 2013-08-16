@@ -17,6 +17,28 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- endbuild -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+
+        google.load('search', '1');
+
+        var imageSearch;
+
+        function searchComplete() {
+
+
+        }
+
+        function OnLoad() {
+
+
+
+        }
+        google.setOnLoadCallback(OnLoad);
+    </script>
+
+
 </head>
 <body>
 
@@ -32,13 +54,17 @@
 
         <form action="#">
             <label>Type city name</label>
-            <input type="text" class="input-block-level" placeholder="Type something…">
+            <input type="text" id="geocoder" class="input-block-level" placeholder="Type something…">
         </form>
-
-        <section id="map-container"></section>
-
     </section>
+
+    <div id="search-results">Loading...</div>
+
 </section>
+
+<section id="map-container"></section>
+
+
 
 <script type="text/javascript">
     window.app = {};
