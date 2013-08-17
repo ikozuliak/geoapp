@@ -16,7 +16,7 @@
     <!-- build:css({.tmp,app}) assets/css/style.css -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- endbuild -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
     <script src="https://www.google.com/jsapi"></script>
 </head>
 <body>
@@ -29,15 +29,14 @@
 
 <section id="content">
     <section class="search-bar">
-        <h1>GeoApp</h1>
+        <h2>GeoApp</h2>
 
         <form action="#">
-            <label>Location name</label>
-            <input type="text" id="geocoder" class="input-block-level" placeholder="Type something…">
+            <input type="text" id="search-input" placeholder="Type an area or city name" value="">
         </form>
     </section>
 
-    <div id="search-results" class="in"></div>
+    <section id="search-results" class="in"></section>
 
 </section>
 
