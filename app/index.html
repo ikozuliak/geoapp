@@ -18,27 +18,6 @@
     <!-- endbuild -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
     <script src="https://www.google.com/jsapi"></script>
-
-    <script type="text/javascript">
-
-        google.load('search', '1');
-
-        var imageSearch;
-
-        function searchComplete() {
-
-
-        }
-
-        function OnLoad() {
-
-
-
-        }
-        google.setOnLoadCallback(OnLoad);
-    </script>
-
-
 </head>
 <body>
 
@@ -49,16 +28,16 @@
 <![endif]-->
 
 <section id="content">
-    <section class="page">
+    <section class="search-bar">
         <h1>GeoApp</h1>
 
         <form action="#">
-            <label>Type city name</label>
+            <label>Location name</label>
             <input type="text" id="geocoder" class="input-block-level" placeholder="Type something…">
         </form>
     </section>
 
-    <div id="search-results">Loading...</div>
+    <div id="search-results" class="in"></div>
 
 </section>
 
@@ -68,6 +47,8 @@
 
 <script type="text/javascript">
     window.app = {};
+
+    google.load('search', '1');
 </script>
 <!-- build:js scripts/app.js -->
 

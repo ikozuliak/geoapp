@@ -15,10 +15,8 @@ h1 {
     margin-bottom: .3em;
 
     &:before {
-        content: '/';
-        position: absolute;
+        content: '/ ';
         color: $orange;
-        left: -.6em;
     }
 
     small{

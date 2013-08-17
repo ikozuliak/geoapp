@@ -25,14 +25,18 @@ body {
 }
 
 #content {
-    position: relative;
     z-index: 1;
+    position: relative;
 
-    .page {
-        max-width: 400px;
-        margin: 0 auto;
-        background: rgba(255,255,255, .7);
-        padding:40px 20px 10px;
+    .search-bar {
+        position: fixed;
+        top:0;
+        height:200px;
+        width: 400px;
+        left:50%;
+        margin-left: -220px;
+        background: rgba(255, 255, 255, .7);
+        padding: 40px 20px 10px;
 
     }
 }
@@ -44,4 +48,39 @@ body {
     right: 0;
     bottom: 0;
     z-index: 0;
+}
+
+#search-results {
+    @include clearfix();
+
+    padding: 20px 30px;
+    position: relative;
+    display: none;
+    z-index: 2;
+
+    background: rgba(255, 255, 255, .7);
+
+    &.in{
+        display: block;
+    }
+
+    & > div{
+        float:left;
+        width:45%;
+
+        & > div{
+            background: url(../images/loader.gif);
+        }
+
+        img{
+            @include opacity(0);
+            @include transition(all 1s linear);
+
+            max-width: 100%;
+        }
+
+        &:first-child{
+            width: 55%;
+        }
+    }
 }
