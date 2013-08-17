@@ -161,7 +161,7 @@
             _onImgClick:function(){
                 this.parentNode.style.width = this.offsetWidth + 'px';
                 this.parentNode.style.height = this.offsetHeight + 'px';
-                (this.className == 'in zoom') ? this.className = 'in' : this.className = 'in zoom';
+                (this.parentNode.className == 'zoom') ? this.parentNode.className = '' : this.parentNode.className = 'zoom';
             }
         }
 
