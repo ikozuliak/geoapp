@@ -17,6 +17,7 @@
 
             this.resultsWrapper = document.getElementById('search-results');
             this.mapWrapper = document.getElementById('map-container');
+            this.searchInput = document.getElementById('search-input');
 
             this._initMap();
             this._initSearch();
@@ -24,7 +25,7 @@
         },
 
         _initMap:function () {
-
+            var self = this;
             this.geocoder = new google.maps.Geocoder();
 
             var styles = [
@@ -48,8 +49,18 @@
                 styles:styles
             };
 
-            this.map = new google.maps.Map(this.mapWrapper,
+            this.map = new google.maps.Map(
+                this.mapWrapper,
                 mapOptions);
+
+            this.autocomplete = new google.maps.places.Autocomplete(this.searchInput);
+
+            this.autocomplete.bindTo('bounds', this.map);
+
+            var marker = new google.maps.Marker({
+                map: self.map
+            });
+
         },
 
         _initSearch:function () {
@@ -66,12 +77,57 @@
                 null);
         },
 
+        _initAutocomplete : function(){
+            google.maps.event.addListener(this.autocomplete, 'place_changed', function() {
+
+                marker.setVisible(false);
+                self.searchInput.className = '';
+                var place = self.autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    self.searchInput.className = 'error';
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    self.map.fitBounds(place.geometry.viewport);
+                } else {
+                    self.map.setCenter(place.geometry.location);
+                    self.map.setZoom(17);  // Why 17? Because it looks good.
+                }
+                marker.setIcon(({
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }));
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
+                var address = '';
+
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+                google.maps.event.addListener(marker, 'click', function () {
+                    self.imageSearch.execute(address);
+                });
+
+            });
+        },
+
 
         _geoCoder:function () {
 
             var self = this;
 
-            var address = document.getElementById('geocoder').value;
+            var address = this.searchInput.value;
 
             this.model._getGeoData(this.geocoder, address, geoCallback);
 
@@ -92,16 +148,22 @@
 
         },
 
+        _autoComplete : function(){
+
+
+
+        },
+
         _initEvents:function () {
 
             var self = this;
 
-            this.events.addEventListener(
-                document.getElementById('geocoder'),
-                'change',
-                this._geoCoder,
-                this
-            )
+//            this.events.addEventListener(
+//                document.getElementById('geocoder'),
+//                'change',
+//                this._geoCoder,
+//                this
+//            )
 
             this.events.addEventListener(
                 window,
