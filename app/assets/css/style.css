@@ -646,27 +646,74 @@ body {
   min-height: 100px;
   background: url(../images/loader.gif) 50% 50% no-repeat;
   text-align: center;
+  -webkit-perspective: 1200px;
+  -moz-perspective: 1200px;
+  -ms-perspective: 1200px;
+  -o-perspective: 1200px;
+  perspective: 1200px;
 }
-/* line 95, ../../../app/assets/sass/_layout.scss */
+/* line 97, ../../../app/assets/sass/_layout.scss */
 #search-results > div img {
   opacity: 0;
   filter: alpha(opacity=0);
-  -webkit-transition: all 1s linear;
-  -moz-transition: all 1s linear;
-  -o-transition: all 1s linear;
-  transition: all 1s linear;
-  max-width: 100%;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  -webkit-transform-origin: 50% 50% 0;
+  -moz-transform-origin: 50% 50% 0;
+  -ms-transform-origin: 50% 50% 0;
+  -o-transform-origin: 50% 50% 0;
+  transform-origin: 50% 50% 0;
+  -webkit-transform: rotate3d(1, 0, 0, -90deg);
+  -moz-transform: rotate3d(1, 0, 0, -90deg);
+  -ms-transform: rotate3d(1, 0, 0, -90deg);
+  -o-transform: rotate3d(1, 0, 0, -90deg);
+  transform: rotate3d(1, 0, 0, -90deg);
+  cursor: pointer;
 }
-/* line 102, ../../../app/assets/sass/_layout.scss */
+/* line 105, ../../../app/assets/sass/_layout.scss */
+#search-results > div img.in {
+  opacity: 1;
+  filter: alpha(opacity=100);
+  -webkit-transform: rotate3d(1, 0, 0, 0deg);
+  -moz-transform: rotate3d(1, 0, 0, 0deg);
+  -ms-transform: rotate3d(1, 0, 0, 0deg);
+  -o-transform: rotate3d(1, 0, 0, 0deg);
+  transform: rotate3d(1, 0, 0, 0deg);
+}
+/* line 110, ../../../app/assets/sass/_layout.scss */
+#search-results > div img.zoom {
+  -webkit-transform: scale(1.5, 1.5);
+  -moz-transform: scale(1.5, 1.5);
+  -ms-transform: scale(1.5, 1.5);
+  -o-transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5);
+  -webkit-transform-origin: 100% 50% 0;
+  -moz-transform-origin: 100% 50% 0;
+  -ms-transform-origin: 100% 50% 0;
+  -o-transform-origin: 100% 50% 0;
+  transform-origin: 100% 50% 0;
+  z-index: 100;
+}
+/* line 118, ../../../app/assets/sass/_layout.scss */
 #search-results > div:first-child {
   width: 55%;
 }
+/* line 121, ../../../app/assets/sass/_layout.scss */
+#search-results > div:first-child img.zoom {
+  -webkit-transform-origin: 0% 50% 0;
+  -moz-transform-origin: 0% 50% 0;
+  -ms-transform-origin: 0% 50% 0;
+  -o-transform-origin: 0% 50% 0;
+  transform-origin: 0% 50% 0;
+}
 
-/* line 108, ../../../app/assets/sass/_layout.scss */
+/* line 128, ../../../app/assets/sass/_layout.scss */
 .pac-container {
   font: 16px Arial;
 }
-/* line 111, ../../../app/assets/sass/_layout.scss */
+/* line 131, ../../../app/assets/sass/_layout.scss */
 .pac-container .pac-item {
   padding: 4px 10px;
 }
