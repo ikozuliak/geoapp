@@ -24,6 +24,19 @@
             this._initEvents();
         },
 
+        _initEvents:function () {
+
+            var self = this;
+
+
+            this.events.addEventListener(
+                window,
+                'scroll',
+                this.events.onScroll,
+                this
+            )
+        },
+
         _initMap:function () {
             var self = this;
             this.geocoder = new google.maps.Geocoder();
@@ -57,9 +70,7 @@
 
             this.autocomplete.bindTo('bounds', this.map);
 
-            var marker = new google.maps.Marker({
-                map: self.map
-            });
+            this._initAutocomplete();
 
         },
 
@@ -77,11 +88,23 @@
                 null);
         },
 
+
         _initAutocomplete : function(){
+
+            var self = this;
+
             google.maps.event.addListener(this.autocomplete, 'place_changed', function() {
 
+                var marker = new google.maps.Marker({
+                    map: self.map,
+                    animation:google.maps.Animation.DROP
+                });
+
                 marker.setVisible(false);
+
+                self._hideSearchResults();
                 self.searchInput.className = '';
+
                 var place = self.autocomplete.getPlace();
 
                 if (!place.geometry) {
@@ -95,28 +118,12 @@
                     self.map.setCenter(place.geometry.location);
                     self.map.setZoom(17);  // Why 17? Because it looks good.
                 }
-                marker.setIcon(({
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(35, 35)
-                }));
 
                 marker.setPosition(place.geometry.location);
                 marker.setVisible(true);
 
-                var address = '';
-
-                if (place.address_components) {
-                    address = [
-                        (place.address_components[0] && place.address_components[0].short_name || ''),
-                        (place.address_components[1] && place.address_components[1].short_name || ''),
-                        (place.address_components[2] && place.address_components[2].short_name || '')
-                    ].join(' ');
-                }
                 google.maps.event.addListener(marker, 'click', function () {
-                    self.imageSearch.execute(address);
+                    self.imageSearch.execute(self.searchInput.value);
                 });
 
             });
@@ -148,30 +155,16 @@
 
         },
 
-        _autoComplete : function(){
-
-
-
+        _hideSearchResults: function(){
+            this.resultsWrapper.style.display = 'none';
+            this.resultsWrapper.innerHTML = '';
+            this.searchPage = 1;
         },
 
-        _initEvents:function () {
-
-            var self = this;
-
-//            this.events.addEventListener(
-//                document.getElementById('geocoder'),
-//                'change',
-//                this._geoCoder,
-//                this
-//            )
-
-            this.events.addEventListener(
-                window,
-                'scroll',
-                this.events.onScroll,
-                this
-            )
+        _showSearchResults: function(){
+            this.resultsWrapper.style.display = 'block';
         },
+
 
         events:{
 
@@ -191,7 +184,7 @@
             onScroll:function () {
                 var scroll = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
 
-                if ((scroll + document.documentElement.clientHeight) >= document.documentElement.scrollHeight) {
+                if ((scroll + document.documentElement.clientHeight) >= document.documentElement.scrollHeight - 100) {
                     this.imageSearch.gotoPage(this.searchPage++);
                 }
             }

@@ -29,13 +29,10 @@ body {
     position: relative;
 
     .search-bar {
-        position: fixed;
         z-index: 10;
-        top:50px;
         height:120px;
         width: 400px;
-        left:50%;
-        margin-left: -220px;
+        margin: 60px auto 0;
         background: rgba(255, 255, 255, .7);
         padding: 10px 20px 10px;
 
@@ -87,17 +84,12 @@ body {
 #search-results {
     @include clearfix();
 
-    background: rgba(255, 255, 255, .7);
-    padding: 220px 30px 20px;
-    position: relative;
     display: none;
+    background: rgba(255, 255, 255, .7);
+    padding: 40px 30px 20px;
+    position: relative;
     z-index: 2;
 
-
-
-    &.in{
-        display: block;
-    }
 
     & > div{
         float:left;

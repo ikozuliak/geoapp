@@ -11,7 +11,7 @@
 
             if (this.imageSearch.results && this.imageSearch.results.length > 0) {
 
-                if (!this.imgColLeft && !this.imgColRight) {
+                if (this.searchPage == 1) {
                     this.imgColLeft = document.createElement('div');
                     this.imgColRight = document.createElement('div');
 
@@ -40,6 +40,8 @@
                 }
 
             }
+
+        this._showSearchResults();
 
         }
 
