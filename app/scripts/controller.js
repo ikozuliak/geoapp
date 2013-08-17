@@ -2,11 +2,8 @@
     'use strict';
 
     function Controller(view, model, options) {
-
         this.view = view;
         this.model = model;
-
-
     }
 
     Controller.prototype = {
@@ -27,7 +24,6 @@
         _initEvents:function () {
 
             var self = this;
-
 
             this.events.addEventListener(
                 window,
@@ -57,7 +53,7 @@
 
             var mapOptions = {
                 zoom:8,
-                center:new google.maps.LatLng(-34.397, 150.644),
+                center:new google.maps.LatLng(45.352145,32.915039),
                 mapTypeId:google.maps.MapTypeId.ROADMAP,
                 styles:styles
             };
@@ -69,7 +65,7 @@
             this.autocomplete = new google.maps.places.Autocomplete(this.searchInput);
 
             this.autocomplete.bindTo('bounds', this.map);
-
+            this.autocomplete.setTypes(['geocode']);
             this._initAutocomplete();
 
         },
@@ -116,7 +112,7 @@
                     self.map.fitBounds(place.geometry.viewport);
                 } else {
                     self.map.setCenter(place.geometry.location);
-                    self.map.setZoom(17);  // Why 17? Because it looks good.
+                    self.map.setZoom(17);
                 }
 
                 marker.setPosition(place.geometry.location);
@@ -129,32 +125,6 @@
             });
         },
 
-
-        _geoCoder:function () {
-
-            var self = this;
-
-            var address = this.searchInput.value;
-
-            this.model._getGeoData(this.geocoder, address, geoCallback);
-
-            function geoCallback(location) {
-
-                self.map.setCenter(location);
-
-                var marker = new google.maps.Marker({
-                    map:self.map,
-                    position:location,
-                    animation:google.maps.Animation.DROP
-                });
-
-                google.maps.event.addListener(marker, 'click', function () {
-                    self.imageSearch.execute(address);
-                });
-            }
-
-        },
-
         _hideSearchResults: function(){
             this.resultsWrapper.style.display = 'none';
             this.resultsWrapper.innerHTML = '';
@@ -164,7 +134,6 @@
         _showSearchResults: function(){
             this.resultsWrapper.style.display = 'block';
         },
-
 
         events:{
 
@@ -188,7 +157,6 @@
                     this.imageSearch.gotoPage(this.searchPage++);
                 }
             }
-
         }
 
     }

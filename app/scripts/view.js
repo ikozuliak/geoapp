@@ -41,12 +41,11 @@
 
             }
 
-        this._showSearchResults();
+            this._showSearchResults();
 
         }
-
-
     }
+
 
     window.app.View = View;
 })(window);
