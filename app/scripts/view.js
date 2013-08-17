@@ -28,12 +28,19 @@
                     var newImg = document.createElement('img');
 
                     newImg.onload = function () {
-                        this.style.opacity = 1;
+                        this.className = "in";
                     };
 
                     newImg.src = result.url;
 
                     imgContainer.appendChild(newImg);
+
+                    this.events.addEventListener(
+                        newImg,
+                        'click',
+                        this.events._onImgClick,
+                        newImg
+                    );
 
                     (i % 2 == 0) ? this.imgColLeft.appendChild(imgContainer) : this.imgColRight.appendChild(imgContainer);
 

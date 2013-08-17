@@ -90,17 +90,37 @@ body {
             min-height: 100px;
             background: url(../images/loader.gif) 50% 50% no-repeat;
             text-align: center;
+
+            @include perspective(1200px);
         }
 
         img{
             @include opacity(0);
-            @include transition(all 1s linear);
+            @include transition(all .4s ease-in-out);
+            @include transform-origin(50%, 50%, 0);
+            @include transform(rotate3d(1, 0, 0, -90deg));
 
-            max-width: 100%;
+            cursor:pointer;
+
+            &.in{
+                @include opacity(100);
+                @include transform(rotate3d(1, 0, 0, 0deg));
+            }
+
+            &.zoom{
+                @include transform(scale(1.5,1.5));
+                @include transform-origin(100%, 50%, 0);
+
+                z-index: 100;
+            }
         }
 
         &:first-child{
             width: 55%;
+
+            img.zoom{
+                @include transform-origin(0%, 50%, 0);
+            }
         }
     }
 }
